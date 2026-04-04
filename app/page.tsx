@@ -1,5 +1,5 @@
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import MetricCard from "@/components/ui/MetricCard";
+import MetricCard from "@/components/MetricCard";
 import {
   AlertCircle,
   Box,
@@ -7,6 +7,9 @@ import {
   ShoppingCart,
   TrendingUp,
 } from "lucide-react";
+import { ChartAreaInteractive } from "@/components/Chart";
+import { ChartPieInteractive } from "@/components/PieChart";
+import ChannelCard from "@/components/ui/ChannelCard";
 
 const Page = () => {
   return (
@@ -53,6 +56,30 @@ const Page = () => {
             value="73.6%"
             subtitle="Discount: Rp 0"
             icon={<Box className="h-4 w-4 text-muted-foreground" />}
+          />
+        </div>
+        <div className="grid gap-4 md:grid-cols-3 mb-6">
+          <ChartAreaInteractive />
+          <ChartPieInteractive />
+        </div>
+        <div className="grid gap-4 md:grid-cols-3 mb-6">
+          <ChannelCard
+            channel="Shopee"
+            revenue="Rp 213.104.969"
+            orders="3944"
+            avgValue="Rp 54.033"
+          />
+          <ChannelCard
+            channel="Tiktok Shop"
+            revenue="Rp 62.271.226"
+            orders="947"
+            avgValue="Rp 65.756"
+          />
+          <ChannelCard
+            channel="Tokopedia"
+            revenue="Rp 6.856.268"
+            orders="109"
+            avgValue="Rp 62.902"
           />
         </div>
       </div>
