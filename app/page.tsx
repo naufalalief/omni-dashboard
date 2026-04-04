@@ -1,7 +1,12 @@
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import MetricCard from "@/components/ui/MetricCard";
-
-import { AlertCircle, DollarSign } from "lucide-react";
+import {
+  AlertCircle,
+  Box,
+  DollarSign,
+  ShoppingCart,
+  TrendingUp,
+} from "lucide-react";
 
 const Page = () => {
   return (
@@ -30,6 +35,24 @@ const Page = () => {
             value="Rp 383.469.919"
             subtitle="Net: Rp 282.232.463"
             icon={<DollarSign className="h-4 w-4 text-muted-foreground" />}
+          />
+          <MetricCard
+            title="Total Orders"
+            value="5,000"
+            subtitle="7117 items sold"
+            icon={<ShoppingCart className="h-4 w-4 text-muted-foreground" />}
+          />
+          <MetricCard
+            title="Average Order Value"
+            value="Rp 76.694"
+            subtitle="Per transaction"
+            icon={<TrendingUp className="h-4 w-4 text-muted-foreground" />}
+          />
+          <MetricCard
+            title="Profit Margin"
+            value="73.6%"
+            subtitle="Discount: Rp 0"
+            icon={<Box className="h-4 w-4 text-muted-foreground" />}
           />
         </div>
       </div>
