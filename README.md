@@ -1,38 +1,40 @@
 # Omnichannel Dashboard
 
-## Deskripsi
+A modern analytics dashboard to monitor business performance across multiple sales channels. Built with Next.js and TypeScript, this project visualizes and analyzes transaction data from a CSV file—no backend required.
 
-Dashboard analitik untuk memantau performa bisnis lintas channel penjualan, dibangun dengan Next.js + TypeScript. Data diambil dari file CSV, tanpa backend tambahan.
+## Features
 
-## Fitur Utama
+- **Business Metrics Overview:** See total revenue, net revenue, total orders, items sold, average order value, and top-performing channels at a glance.
+- **Automated Insights:** Instantly detect profit margins and high shipping fees.
+- **Interactive Visualizations:**
+  - Area chart for daily gross revenue trends.
+  - Pie chart for revenue distribution by channel.
+- **Advanced Transactions Table:** Search, filter, and sort all transactions easily.
+- **Responsive UI:** Fully optimized for desktop and mobile devices.
+- **In-app Project Info:** Floating modal with project explanation and usage guide.
 
-- Ringkasan metrik bisnis: total revenue, net revenue, total order, item, average order value, channel terpopuler.
-- Insight otomatis: profit margin, deteksi biaya pengiriman tinggi.
-- Visualisasi tren revenue harian (area chart) dan distribusi revenue per channel (pie chart).
-- Tabel transaksi lengkap dengan fitur search, filter, dan sorting.
-- Responsive dan mudah digunakan.
+## Getting Started
 
-## Cara Menjalankan
+1. Clone this repository.
+2. Run `npm install` to install dependencies.
+3. Start the development server with `npm run dev`.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser.
+5. For deployment, you can use Vercel, Netlify, or any static hosting.
 
-1. Clone repo ini.
-2. Jalankan `npm install` untuk install dependencies.
-3. Jalankan `npm run dev` untuk development.
-4. Buka di browser: [http://localhost:3000](http://localhost:3000)
-5. Untuk deploy, bisa langsung ke Vercel/Netlify.
+## Usage
 
-## Cara Pakai
+- View key metrics and insights at the top of the dashboard.
+- Analyze trends and revenue distribution with interactive charts.
+- Search, filter, and sort transactions in the table.
+- Click the floating info button for a project overview and usage tips.
+- Developer info is available in the footer.
 
-- Lihat metrik dan insight di bagian atas dashboard.
-- Analisis tren dan distribusi revenue lewat chart.
-- Cari, filter, dan urutkan transaksi di tabel.
-- Klik nama pada footer untuk info developer.
+## Notes
 
-## Catatan
-
-- Data diambil dari `/public/import/frontend-engineer-task.csv`.
-- Tidak ada fitur edit/hapus data.
-- Tidak ada backend, semua berjalan di frontend.
+- Data source: `/public/import/frontend-engineer-task.csv`
+- No edit/delete features for data.
+- 100% frontend—no backend or database required.
 
 ## Developer
 
-- [Naufal Alief](https://github.com/naufalalief) - [LinkedIn](https://www.linkedin.com/in/naufal-alief/)
+- [Naufal Alief](https://github.com/naufalalief) — [LinkedIn](https://www.linkedin.com/in/naufal-alief/)
