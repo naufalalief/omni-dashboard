@@ -31,55 +31,36 @@ import {
 
 export const description = "An interactive pie chart";
 
-const desktopData = [
-  { month: "january", desktop: 186, fill: "var(--color-january)" },
-  { month: "february", desktop: 305, fill: "var(--color-february)" },
-  { month: "march", desktop: 237, fill: "var(--color-march)" },
-  { month: "april", desktop: 173, fill: "var(--color-april)" },
-  { month: "may", desktop: 209, fill: "var(--color-may)" },
+const PIE_COLORS = [
+  "#222222",
+  "#444444",
+  "#666666",
+  "#888888",
+  "#AAAAAA",
+  "#CCCCCC",
+  "#E5E5E5",
+  "#F5F5F5",
 ];
 
-const chartConfig = {
-  visitors: {
-    label: "Visitors",
-  },
-  desktop: {
-    label: "Desktop",
-  },
-  mobile: {
-    label: "Mobile",
-  },
-  january: {
-    label: "January",
-    color: "var(--chart-1)",
-  },
-  february: {
-    label: "February",
-    color: "var(--chart-2)",
-  },
-  march: {
-    label: "March",
-    color: "var(--chart-3)",
-  },
-  april: {
-    label: "April",
-    color: "var(--chart-4)",
-  },
-  may: {
-    label: "May",
-    color: "var(--chart-5)",
-  },
-} satisfies ChartConfig;
-
-export function ChartPieInteractive() {
+export function ChartPieInteractive({
+  data,
+}: {
+  data: { channel: string; value: number }[];
+}) {
   const id = "pie-interactive";
-  const [activeMonth, setActiveMonth] = React.useState(desktopData[0].month);
-
-  const activeIndex = React.useMemo(
-    () => desktopData.findIndex(item => item.month === activeMonth),
-    [activeMonth],
-  );
-  const months = React.useMemo(() => desktopData.map(item => item.month), []);
+  const [activeIndex, setActiveIndex] = React.useState(0);
+  const channels = data.map(item => item.channel);
+  // Build chartConfig dynamically for legend/colors
+  const chartConfig = React.useMemo(() => {
+    const config: ChartConfig = {};
+    channels.forEach((ch, idx) => {
+      config[ch] = {
+        label: ch,
+        color: PIE_COLORS[idx % PIE_COLORS.length],
+      };
+    });
+    return config;
+  }, [channels]);
 
   const renderPieShape = React.useCallback(
     ({ index, outerRadius = 0, ...props }: PieSectorShapeProps) => {
@@ -95,7 +76,6 @@ export function ChartPieInteractive() {
           </g>
         );
       }
-
       return <Sector {...props} outerRadius={outerRadius} />;
     },
     [activeIndex],
@@ -107,41 +87,24 @@ export function ChartPieInteractive() {
       <CardHeader className="flex-row items-start space-y-0 pb-0">
         <div className="grid gap-1">
           <CardTitle>Pie Chart - Interactive</CardTitle>
-          <CardDescription>January - June 2024</CardDescription>
+          <CardDescription>Distribusi Revenue per Channel</CardDescription>
         </div>
-        <Select value={activeMonth} onValueChange={setActiveMonth}>
+        <Select
+          value={channels[activeIndex]}
+          onValueChange={val => setActiveIndex(channels.indexOf(val))}
+        >
           <SelectTrigger
-            className="ml-auto h-7 w-[130px] rounded-lg pl-2.5"
-            aria-label="Select a value"
+            className="ml-auto h-7 w-32.5 rounded-lg pl-2.5"
+            aria-label="Select channel"
           >
-            <SelectValue placeholder="Select month" />
+            <SelectValue placeholder="Select channel" />
           </SelectTrigger>
           <SelectContent align="end" className="rounded-xl">
-            {months.map(key => {
-              const config = chartConfig[key as keyof typeof chartConfig];
-
-              if (!config) {
-                return null;
-              }
-
-              return (
-                <SelectItem
-                  key={key}
-                  value={key}
-                  className="rounded-lg [&_span]:flex"
-                >
-                  <div className="flex items-center gap-2 text-xs">
-                    <span
-                      className="flex h-3 w-3 shrink-0 rounded-xs"
-                      style={{
-                        backgroundColor: `var(--color-${key})`,
-                      }}
-                    />
-                    {config?.label}
-                  </div>
-                </SelectItem>
-              );
-            })}
+            {channels.map((ch, idx) => (
+              <SelectItem key={ch} value={ch} className="rounded-lg">
+                {ch}
+              </SelectItem>
+            ))}
           </SelectContent>
         </Select>
       </CardHeader>
@@ -149,7 +112,7 @@ export function ChartPieInteractive() {
         <ChartContainer
           id={id}
           config={chartConfig}
-          className="mx-auto aspect-square w-full max-w-[300px]"
+          className="mx-auto aspect-square w-full max-w-75"
         >
           <PieChart>
             <ChartTooltip
@@ -157,9 +120,12 @@ export function ChartPieInteractive() {
               content={<ChartTooltipContent hideLabel />}
             />
             <Pie
-              data={desktopData}
-              dataKey="desktop"
-              nameKey="month"
+              data={data.map((d, idx) => ({
+                ...d,
+                fill: PIE_COLORS[idx % PIE_COLORS.length],
+              }))}
+              dataKey="value"
+              nameKey="channel"
               innerRadius={60}
               strokeWidth={5}
               shape={renderPieShape}
@@ -179,14 +145,14 @@ export function ChartPieInteractive() {
                           y={viewBox.cy}
                           className="fill-foreground text-3xl font-bold"
                         >
-                          {desktopData[activeIndex].desktop.toLocaleString()}
+                          {data[activeIndex].value.toLocaleString("id-ID")}
                         </tspan>
                         <tspan
                           x={viewBox.cx}
                           y={(viewBox.cy || 0) + 24}
                           className="fill-muted-foreground"
                         >
-                          Visitors
+                          Revenue
                         </tspan>
                       </text>
                     );
