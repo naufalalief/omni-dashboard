@@ -24,10 +24,7 @@ export default function ProjectInfoModal() {
         <Info className="h-6 w-6" />
       </button>
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent
-          className="w-full max-w-full sm:max-w-md md:max-w-lg px-4 sm:px-8 py-5 sm:py-8 overflow-y-auto rounded-3xl"
-          style={{ maxHeight: "90vh" }}
-        >
+        <DialogContent className="w-full max-w-full sm:max-w-md md:max-w-lg px-4 sm:px-8 py-5 sm:py-8 overflow-y-auto rounded-3xl">
           <DialogHeader>
             <div className="flex items-center gap-2 mb-1">
               <Info className="h-5 w-5 text-primary" />
@@ -43,7 +40,7 @@ export default function ProjectInfoModal() {
               <h4 className="font-semibold text-base mb-1 text-foreground">
                 Insights discovered from the data:
               </h4>
-              <ul className="list-disc list-inside space-y-2 text-base">
+              <ul className="list-disc list-inside space-y-2 text-sm">
                 <li>Most popular sales channels</li>
                 <li>
                   Daily revenue trends and revenue distribution by channel
