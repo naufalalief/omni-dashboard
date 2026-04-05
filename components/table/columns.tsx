@@ -7,6 +7,7 @@ export const columns: ColumnDef<Transaction, unknown>[] = [
   {
     accessorKey: "order_id",
     header: "Order ID",
+    enableSorting: true,
     cell: ({ getValue }: { getValue: () => unknown }) => (
       <b>{String(getValue() ?? "-")}</b>
     ),
@@ -14,6 +15,7 @@ export const columns: ColumnDef<Transaction, unknown>[] = [
   {
     accessorKey: "channel",
     header: "Channel",
+    enableSorting: true,
     cell: ({ getValue }: { getValue: () => unknown }) => (
       <Badge
         variant="outline"
@@ -26,6 +28,7 @@ export const columns: ColumnDef<Transaction, unknown>[] = [
   {
     accessorKey: "pay_time",
     header: "Date",
+    enableSorting: true,
     cell: ({ getValue }: { getValue: () => unknown }) => {
       const val = getValue();
       if (!val) return "-";
@@ -39,6 +42,7 @@ export const columns: ColumnDef<Transaction, unknown>[] = [
   {
     accessorKey: "gross_amount",
     header: "Gross Amount",
+    enableSorting: true,
     cell: ({ getValue }: { getValue: () => unknown }) => (
       <span className="font-semibold">
         Rp {Number(getValue() ?? 0).toLocaleString("id-ID")}
@@ -48,6 +52,7 @@ export const columns: ColumnDef<Transaction, unknown>[] = [
   {
     accessorKey: "net_amount",
     header: "Net Amount",
+    enableSorting: true,
     cell: ({ getValue }: { getValue: () => unknown }) => (
       <span>Rp {Number(getValue() ?? 0).toLocaleString("id-ID")}</span>
     ),
@@ -55,6 +60,7 @@ export const columns: ColumnDef<Transaction, unknown>[] = [
   {
     accessorKey: "discount_amount",
     header: "Discount",
+    enableSorting: true,
     cell: ({ getValue }: { getValue: () => unknown }) =>
       Number(getValue() ?? 0) === 0 ? (
         <span>-</span>
@@ -65,6 +71,7 @@ export const columns: ColumnDef<Transaction, unknown>[] = [
   {
     accessorKey: "shipping_fee_amount",
     header: "Shipping",
+    enableSorting: true,
     cell: ({ getValue }: { getValue: () => unknown }) => (
       <span>Rp {Number(getValue() ?? 0).toLocaleString("id-ID")}</span>
     ),
@@ -72,10 +79,12 @@ export const columns: ColumnDef<Transaction, unknown>[] = [
   {
     accessorKey: "item_count",
     header: "Items",
+    enableSorting: true,
   },
   {
     accessorKey: "order_status",
     header: "Status",
+    enableSorting: true,
     cell: ({ getValue }: { getValue: () => unknown }) => (
       <Badge
         variant="default"

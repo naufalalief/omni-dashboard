@@ -88,8 +88,8 @@ export function DataTable<TData extends Record<string, any>, TValue = unknown>({
         <div>
           <h2 className="text-lg font-semibold mb-1">Recent Transactions</h2>
           <p className="text-muted-foreground mb-4 text-sm">
-            Showing {table.getRowModel().rows.length} of {data.length}{" "}
-            transactions
+            Showing {table.getRowModel().rows.length} of{" "}
+            {table.getPrePaginationRowModel().rows.length} transactions
           </p>
         </div>
         <div className="flex items-center space-x-2">
@@ -189,14 +189,32 @@ export function DataTable<TData extends Record<string, any>, TValue = unknown>({
                 {headerGroup.headers.map(header => (
                   <TableHead
                     key={header.id}
-                    className="px-4 py-3 text-xs font-semibold tracking-wide uppercase text-muted-foreground bg-background"
+                    className="px-4 py-3 text-xs font-semibold tracking-wide uppercase text-muted-foreground bg-background select-none cursor-pointer"
+                    onClick={
+                      header.column.getCanSort()
+                        ? header.column.getToggleSortingHandler()
+                        : undefined
+                    }
                   >
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(
+                    {header.isPlaceholder ? null : (
+                      <span className="flex items-center gap-1">
+                        {flexRender(
                           header.column.columnDef.header,
                           header.getContext(),
                         )}
+                        {header.column.getCanSort() && (
+                          <ChevronDown
+                            className={
+                              header.column.getIsSorted() === "asc"
+                                ? "ml-1 h-4 w-4 transition-transform rotate-180"
+                                : header.column.getIsSorted() === "desc"
+                                  ? "ml-1 h-4 w-4 transition-transform"
+                                  : "ml-1 h-4 w-4 opacity-30"
+                            }
+                          />
+                        )}
+                      </span>
+                    )}
                   </TableHead>
                 ))}
               </TableRow>
