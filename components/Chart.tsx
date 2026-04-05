@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts";
-
 import {
   Card,
   CardContent,
@@ -19,27 +18,30 @@ import {
   type ChartConfig,
 } from "@/components/ui/chart";
 
-export const description = "An interactive area chart";
+export type ChannelAreaChartData = Record<string, string | number> & {
+  date: string;
+};
 
 const AREA_COLORS = [
-  '#222222',
-  '#444444',
-  '#666666',
-  '#888888',
-  '#AAAAAA',
-  '#CCCCCC',
-  '#E5E5E5',
-  '#F5F5F5',
+  "#222222",
+  "#444444",
+  "#666666",
+  "#888888",
+  "#AAAAAA",
+  "#CCCCCC",
+  "#E5E5E5",
+  "#F5F5F5",
 ];
-const getChannelColor = (idx: number) => AREA_COLORS[idx % AREA_COLORS.length];
 
-type ChannelAreaChartData = { date: string } & { [channel: string]: number };
+function getChannelColor(idx: number) {
+  return AREA_COLORS[idx % AREA_COLORS.length];
+}
 
 export function ChartAreaInteractive({
   data,
   channels,
 }: {
-  data: ChannelAreaChartData[];
+  data: Record<string, string | number>[];
   channels: string[];
 }) {
   const chartConfig = React.useMemo(() => {
@@ -53,8 +55,6 @@ export function ChartAreaInteractive({
     return config;
   }, [channels]);
 
-  const filteredData = data;
-
   return (
     <Card className="pt-0 col-span-2">
       <CardHeader className="flex items-center gap-2 space-y-0 border-b py-5 sm:flex-row">
@@ -64,7 +64,7 @@ export function ChartAreaInteractive({
         </div>
       </CardHeader>
       <CardContent className="px-2 pt-4 sm:px-6 sm:pt-6">
-        {filteredData.length === 0 ? (
+        {data.length === 0 ? (
           <div className="w-full h-50 flex items-center justify-center text-muted-foreground">
             No data available for the selected range.
           </div>
@@ -73,7 +73,7 @@ export function ChartAreaInteractive({
             config={chartConfig}
             className="aspect-auto h-62.5 w-full"
           >
-            <AreaChart data={filteredData}>
+            <AreaChart data={data}>
               <CartesianGrid vertical={false} />
               <XAxis
                 dataKey="date"
@@ -96,18 +96,18 @@ export function ChartAreaInteractive({
                 width={90}
                 tickFormatter={value => Number(value).toLocaleString("id-ID")}
                 allowDecimals={false}
-                domain={[0, 'auto']}
+                domain={[0, "auto"]}
               />
               <ChartTooltip
                 cursor={false}
                 content={
                   <ChartTooltipContent
-                    labelFormatter={value => {
-                      return new Date(value).toLocaleDateString("en-US", {
+                    labelFormatter={value =>
+                      new Date(value).toLocaleDateString("en-US", {
                         month: "short",
                         day: "numeric",
-                      });
-                    }}
+                      })
+                    }
                     indicator="dot"
                   />
                 }

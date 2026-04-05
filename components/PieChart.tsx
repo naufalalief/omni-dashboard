@@ -2,11 +2,7 @@
 
 import * as React from "react";
 import { Label, Pie, PieChart, Sector } from "recharts";
-import type {
-  PieSectorDataItem,
-  PieSectorShapeProps,
-} from "recharts/types/polar/Pie";
-
+import type { PieSectorShapeProps } from "recharts/types/polar/Pie";
 import {
   Card,
   CardContent,
@@ -29,8 +25,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-export const description = "An interactive pie chart";
-
 const PIE_COLORS = [
   "#222222",
   "#444444",
@@ -42,42 +36,49 @@ const PIE_COLORS = [
   "#F5F5F5",
 ];
 
-export function ChartPieInteractive({
-  data,
-}: {
+type ChartPieInteractiveProps = {
   data: { channel: string; value: number }[];
-}) {
+};
+
+function getPieChartConfig(channels: string[]): ChartConfig {
+  const config: ChartConfig = {};
+  channels.forEach((ch, idx) => {
+    config[ch] = {
+      label: ch,
+      color: PIE_COLORS[idx % PIE_COLORS.length],
+    };
+  });
+  return config;
+}
+
+function renderPieShapeFactory(activeIndex: number) {
+  return ({ index, outerRadius = 0, ...props }: PieSectorShapeProps) => {
+    if (index === activeIndex) {
+      return (
+        <g>
+          <Sector {...props} outerRadius={outerRadius + 10} />
+          <Sector
+            {...props}
+            outerRadius={outerRadius + 25}
+            innerRadius={outerRadius + 12}
+          />
+        </g>
+      );
+    }
+    return <Sector {...props} outerRadius={outerRadius} />;
+  };
+}
+
+export function ChartPieInteractive({ data }: ChartPieInteractiveProps) {
   const id = "pie-interactive";
   const [activeIndex, setActiveIndex] = React.useState(0);
   const channels = data.map(item => item.channel);
-  // Build chartConfig dynamically for legend/colors
-  const chartConfig = React.useMemo(() => {
-    const config: ChartConfig = {};
-    channels.forEach((ch, idx) => {
-      config[ch] = {
-        label: ch,
-        color: PIE_COLORS[idx % PIE_COLORS.length],
-      };
-    });
-    return config;
-  }, [channels]);
-
-  const renderPieShape = React.useCallback(
-    ({ index, outerRadius = 0, ...props }: PieSectorShapeProps) => {
-      if (index === activeIndex) {
-        return (
-          <g>
-            <Sector {...props} outerRadius={outerRadius + 10} />
-            <Sector
-              {...props}
-              outerRadius={outerRadius + 25}
-              innerRadius={outerRadius + 12}
-            />
-          </g>
-        );
-      }
-      return <Sector {...props} outerRadius={outerRadius} />;
-    },
+  const chartConfig = React.useMemo(
+    () => getPieChartConfig(channels),
+    [channels],
+  );
+  const renderPieShape = React.useMemo(
+    () => renderPieShapeFactory(activeIndex),
     [activeIndex],
   );
 
@@ -157,6 +158,7 @@ export function ChartPieInteractive({
                       </text>
                     );
                   }
+                  return null;
                 }}
               />
             </Pie>

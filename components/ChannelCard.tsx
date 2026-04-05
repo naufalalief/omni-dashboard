@@ -1,13 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import type { ReactNode } from "react";
-
-interface ChannelCardProps {
-  channel: string;
-  revenue: string | number;
-  orders: string | number;
-  avgValue: string | number;
-  icon?: ReactNode;
-}
+import { ChannelCardProps } from "@/lib/interfaces";
 
 const ChannelCard = ({
   channel,

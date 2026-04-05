@@ -5,23 +5,15 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import type { ReactNode } from "react";
+import { MetricCardProps } from "@/lib/interfaces";
 
-interface MetricCardProps {
-  title: string;
-  value: string | number;
-  subtitle?: string;
-  icon?: ReactNode;
-  footer?: ReactNode;
-}
-
-const MetricCard = ({
+export default function MetricCard({
   title,
   value,
   subtitle,
   icon,
   footer,
-}: MetricCardProps) => {
+}: MetricCardProps) {
   return (
     <Card>
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -37,6 +29,4 @@ const MetricCard = ({
       {footer && <CardFooter>{footer}</CardFooter>}
     </Card>
   );
-};
-
-export default MetricCard;
+}
