@@ -128,8 +128,6 @@ export function DataTable<TData extends Record<string, any>, TValue = unknown>({
               new Set((data as TData[]).map(row => row[filter.accessorKey])),
             ).filter(Boolean);
             const selected = (col.getFilterValue() as string) ?? "";
-            // Determine if this is the special 'All' option
-            const isAllLabel = filter.label?.toLowerCase().includes("all");
             return (
               <DropdownMenu key={filter.accessorKey}>
                 <DropdownMenuTrigger asChild>
