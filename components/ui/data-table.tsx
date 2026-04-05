@@ -84,16 +84,16 @@ export function DataTable<TData extends Record<string, any>, TValue = unknown>({
 
   return (
     <div className="rounded-3xl border shadow-sm bg-card p-0">
-      <div className="flex flex-wrap gap-2 items-center justify-between px-6 pt-6 pb-2">
-        <div>
+      <div className="flex flex-col sm:flex-row flex-wrap gap-2 sm:gap-4 items-start sm:items-center justify-between px-3 sm:px-6 pt-4 sm:pt-6 pb-2 w-full">
+        <div className="w-full sm:w-auto">
           <h2 className="text-lg font-semibold mb-1">Recent Transactions</h2>
           <p className="text-muted-foreground mb-4 text-sm">
             Showing {table.getRowModel().rows.length} of{" "}
             {table.getPrePaginationRowModel().rows.length} transactions
           </p>
         </div>
-        <div className="flex items-center space-x-2">
-          <InputGroup>
+        <div className="flex flex-wrap gap-2 w-full sm:w-auto">
+          <InputGroup className="w-full sm:w-auto">
             <InputGroupAddon align="inline-start">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -178,7 +178,7 @@ export function DataTable<TData extends Record<string, any>, TValue = unknown>({
           })}
         </div>
       </div>
-      <div className="overflow-x-auto p-6 ">
+      <div className="overflow-x-auto p-3 sm:p-6 ">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map(headerGroup => (
@@ -251,7 +251,7 @@ export function DataTable<TData extends Record<string, any>, TValue = unknown>({
           </TableBody>
         </Table>
       </div>
-      <div className="flex items-center justify-end space-x-2 px-6 py-4">
+      <div className="flex items-center justify-end space-x-2 px-3 sm:px-6 py-4">
         <Button
           variant="outline"
           size="sm"

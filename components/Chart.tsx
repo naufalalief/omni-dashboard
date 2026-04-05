@@ -59,7 +59,9 @@ export function ChartAreaInteractive({
     <Card className="pt-0 col-span-2">
       <CardHeader className="flex items-center gap-2 space-y-0 border-b py-5 sm:flex-row">
         <div className="grid flex-1 gap-1">
-          <CardTitle>Area Chart - Interactive</CardTitle>
+          <CardTitle className="text-base sm:text-lg font-semibold">
+            Interactive Area Chart
+          </CardTitle>
           <CardDescription>Daily Gross Revenue Trend</CardDescription>
         </div>
       </CardHeader>
@@ -94,7 +96,7 @@ export function ChartAreaInteractive({
                 axisLine={false}
                 tickMargin={8}
                 width={90}
-                tickFormatter={value => Number(value).toLocaleString("id-ID")}
+                tickFormatter={value => Number(value).toLocaleString("en-US")}
                 allowDecimals={false}
                 domain={[0, "auto"]}
               />

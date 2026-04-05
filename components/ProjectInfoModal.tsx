@@ -24,57 +24,60 @@ export default function ProjectInfoModal() {
         <Info className="h-6 w-6" />
       </button>
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="max-w-lg">
+        <DialogContent
+          className="w-full max-w-full sm:max-w-md md:max-w-lg px-4 sm:px-8 py-5 sm:py-8 overflow-y-auto rounded-3xl"
+          style={{ maxHeight: "90vh" }}
+        >
           <DialogHeader>
             <div className="flex items-center gap-2 mb-1">
               <Info className="h-5 w-5 text-primary" />
               <DialogTitle>Project Explanation</DialogTitle>
             </div>
             <DialogDescription>
-              Penjelasan singkat tentang insight, prioritas, dan penggunaan
-              dashboard.
+              A brief explanation about the insights, priorities, and usage of
+              this dashboard.
             </DialogDescription>
           </DialogHeader>
-          <div className="space-y-6 mt-2">
+          <div className="space-y-8 mt-4">
             <section>
               <h4 className="font-semibold text-base mb-1 text-foreground">
-                What insights you found from the data:
+                Insights discovered from the data:
               </h4>
-              <ul className="list-disc list-inside space-y-1 text-sm">
-                <li>Channel penjualan paling populer</li>
+              <ul className="list-disc list-inside space-y-2 text-base">
+                <li>Most popular sales channels</li>
                 <li>
-                  Tren pendapatan harian dan distribusi revenue per channel
+                  Daily revenue trends and revenue distribution by channel
                 </li>
                 <li>
-                  Jumlah order selesai, profit margin, deteksi shipping fee
-                  tinggi
+                  Number of completed orders, profit margin, high shipping fee
+                  detection
                 </li>
-                <li>Rata-rata nilai transaksi dan jumlah item terjual</li>
+                <li>Average transaction value and total items sold</li>
               </ul>
             </section>
             <section>
               <h4 className="font-semibold text-base mb-1 text-foreground">
-                What you prioritized:
+                What was prioritized:
               </h4>
               <ul className="list-disc list-inside space-y-1 text-sm">
                 <li>
-                  Metrik utama bisnis (revenue, order, item, avg value, channel
-                  terpopuler)
+                  Key business metrics (revenue, orders, items, avg value, top
+                  channels)
                 </li>
-                <li>Visualisasi tren dan distribusi</li>
-                <li>Tabel transaksi yang mudah dicari, difilter, diurutkan</li>
-                <li>Insight otomatis (profit margin, shipping fee tinggi)</li>
+                <li>Trend and distribution visualizations</li>
+                <li>Transaction table with easy search, filter, and sort</li>
+                <li>Automatic insights (profit margin, high shipping fee)</li>
               </ul>
             </section>
             <section>
               <h4 className="font-semibold text-base mb-1 text-foreground">
-                What you intentionally did NOT include:
+                What was intentionally NOT included:
               </h4>
               <ul className="list-disc list-inside space-y-1 text-sm">
-                <li>Analisis customer (data tidak ada)</li>
-                <li>Export/import data, notifikasi, integrasi backend</li>
-                <li>Visualisasi/chart yang tidak relevan</li>
-                <li>Fitur edit/hapus data</li>
+                <li>Customer analysis (no data available)</li>
+                <li>Export/import, notifications, backend integration</li>
+                <li>Irrelevant visualizations/charts</li>
+                <li>Edit/delete data features</li>
               </ul>
             </section>
             <section>
@@ -82,11 +85,11 @@ export default function ProjectInfoModal() {
                 How a user would use this daily:
               </h4>
               <ul className="list-disc list-inside space-y-1 text-sm">
-                <li>Melihat ringkasan performa bisnis</li>
-                <li>Memantau channel paling efektif dan tren penjualan</li>
-                <li>Mendeteksi anomali biaya pengiriman</li>
-                <li>Cari/filter/urutkan transaksi untuk analisis detail</li>
-                <li>Mengambil keputusan cepat dari insight dashboard</li>
+                <li>View business performance summary</li>
+                <li>Monitor most effective channels and sales trends</li>
+                <li>Detect shipping cost anomalies</li>
+                <li>Search/filter/sort transactions for detailed analysis</li>
+                <li>Make quick decisions from dashboard insights</li>
               </ul>
             </section>
           </div>

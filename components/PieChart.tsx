@@ -83,19 +83,26 @@ export function ChartPieInteractive({ data }: ChartPieInteractiveProps) {
   );
 
   return (
-    <Card data-chart={id} className="flex flex-col">
+    <Card
+      data-chart={id}
+      className="flex flex-col w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl mx-auto shadow-md"
+    >
       <ChartStyle id={id} config={chartConfig} />
-      <CardHeader className="flex-row items-start space-y-0 pb-0">
-        <div className="grid gap-1">
-          <CardTitle>Pie Chart - Interactive</CardTitle>
-          <CardDescription>Distribusi Revenue per Channel</CardDescription>
+      <CardHeader className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 pb-0 gap-2">
+        <div className="flex-1 grid gap-1">
+          <CardTitle className="text-base sm:text-lg font-semibold">
+            Revenue Distribution by Channel
+          </CardTitle>
+          <CardDescription className="text-xs sm:text-sm">
+            Channel: <span className="font-bold">{channels[activeIndex]}</span>
+          </CardDescription>
         </div>
         <Select
           value={channels[activeIndex]}
           onValueChange={val => setActiveIndex(channels.indexOf(val))}
         >
           <SelectTrigger
-            className="ml-auto h-7 w-32.5 rounded-lg pl-2.5"
+            className="h-7 w-28 sm:w-32 rounded-lg pl-2.5"
             aria-label="Select channel"
           >
             <SelectValue placeholder="Select channel" />
@@ -113,7 +120,7 @@ export function ChartPieInteractive({ data }: ChartPieInteractiveProps) {
         <ChartContainer
           id={id}
           config={chartConfig}
-          className="mx-auto aspect-square w-full max-w-75"
+          className="mx-auto aspect-square w-full max-w-[260px] sm:max-w-[320px] md:max-w-[380px]"
         >
           <PieChart>
             <ChartTooltip
@@ -144,14 +151,14 @@ export function ChartPieInteractive({ data }: ChartPieInteractiveProps) {
                         <tspan
                           x={viewBox.cx}
                           y={viewBox.cy}
-                          className="fill-foreground text-3xl font-bold"
+                          className="fill-foreground text-2xl sm:text-3xl font-bold"
                         >
-                          {data[activeIndex].value.toLocaleString("id-ID")}
+                          {data[activeIndex].value.toLocaleString("en-US")}
                         </tspan>
                         <tspan
                           x={viewBox.cx}
-                          y={(viewBox.cy || 0) + 24}
-                          className="fill-muted-foreground"
+                          y={(viewBox.cy || 0) + 20}
+                          className="fill-muted-foreground text-xs sm:text-base"
                         >
                           Revenue
                         </tspan>
