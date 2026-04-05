@@ -38,7 +38,7 @@ export default function ProjectInfoModal() {
               this dashboard.
             </DialogDescription>
           </DialogHeader>
-          <div className="space-y-8 mt-4">
+          <div className="space-y-2 mt-1">
             <section>
               <h4 className="font-semibold text-base mb-1 text-foreground">
                 Insights discovered from the data:
